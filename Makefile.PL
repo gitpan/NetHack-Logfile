@@ -1,16 +1,20 @@
-# Load the Module::Install bundled in ./inc/
-use inc::Module::Install;
 
-# Define metadata
-name           'NetHack-Logfile';
-all_from       'lib/NetHack/Logfile.pm';
+use strict;
+use warnings;
 
-requires       'Carp';
-requires       'Exporter';
+use ExtUtils::MakeMaker;
 
-build_requires 'Test::More';
-build_requires 'File::Temp';
-
-auto_install;
-WriteAll;
-
+WriteMakefile(
+  DISTNAME  => 'NetHack-Logfile',
+  NAME      => 'NetHack::Logfile',
+  AUTHOR    => 'Shawn\ M\ Moore\ \<sartak\@gmail\.com\>',
+  ABSTRACT  => 'Parse and create NetHack logfiles',
+  VERSION   => '1.00',
+  EXE_FILES => [ qw() ],
+  (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'perl') : ()),
+  PREREQ_PM    => {
+    "Sub::Exporter" => '0.01',
+    "MooseX::Attributes::Curried" => '0.02',
+    "Moose" => '0.78',
+  },
+);
